@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">WorkoutPlanner</string>
+    <string name="new_exercise">Add an Exercise</string>
+    <string name="weight_string">Weight:</string>
+    <string name="reps_string">Reps:</string>
+    <string name="sets_string">Sets:</string>
+    <string name="name_string">Name:</string>
 </resources>
