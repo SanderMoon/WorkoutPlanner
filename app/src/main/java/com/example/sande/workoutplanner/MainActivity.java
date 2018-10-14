@@ -14,6 +14,25 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+/**
+ *
+ *  Deze activity moeten we later omzetten in een non-main activity omdat dit alleen de activity
+ *  is die gebruikt wordt wanneer je exercises moet toevoegen aan je workouts.
+ *  We moeten namelijk hierna Workout objecten gaan maken met exercises er in.
+ *  Waarschijnlijk deleten we dan ook de weight/reps/sets uit de weergave van de exercises in de lijst
+ *  iig een goede oefening dit.
+ *
+ */
+
+
+//TODO 2 - Custom listItem
+//TODO 3 - show weight, sets and reps in the custom listitem
+//TODO 4 - Add a search button in the menu and make exercises searchable
+//TODO 5 - Give the list a header / AND make the listview collapsable
+//TODO 6 - Divide Exercises up based on muscle group and have each muscle group their own collapsable list
+//TODO 7 - Handle clickevents on the list
+//TODO 8 - Create a pre-defined list of exercises somewhere to use in the listview
+
 public class MainActivity extends AppCompatActivity {
 
     ArrayAdapter<Exercise> sAdapter;
@@ -67,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                //TODO 1 - nullcheck the input
                 EditText nameInput = view.findViewById(R.id.name_editText);
                 EditText weightInput = view.findViewById(R.id.weight_editText);
                 EditText setsInput = view.findViewById(R.id.sets_editText);
