@@ -5,4 +5,7 @@
     <string name="reps_string">Reps:</string>
     <string name="sets_string">Sets:</string>
     <string name="name_string">Name:</string>
+    <string name="zeroInt">0</string>
+    <string name="zeroDec">0.0</string>
+    <string name="defaultExerciseName">Exercise</string>
 </resources>

@@ -14,6 +14,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.sande.workoutplanner.Model.Exercise;
+import com.example.sande.workoutplanner.Model.ExerciseCollection;
+
 /**
  *
  *  Deze activity moeten we later omzetten in een non-main activity omdat dit alleen de activity
@@ -40,16 +43,16 @@ public class MainActivity extends AppCompatActivity {
     private double m_Weight;
     private int m_sets;
     private int m_reps;
+
     ExerciseCollection collectionWrapper;
     private View view;
-
+    private int index = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActionBar();
         setContentView(R.layout.activity_main);
-
         collectionWrapper = new ExerciseCollection();
         sAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, collectionWrapper.getCollection());
         ListView listview = findViewById(R.id.listview);
@@ -87,16 +90,39 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //TODO 1 - nullcheck the input
+
                 EditText nameInput = view.findViewById(R.id.name_editText);
                 EditText weightInput = view.findViewById(R.id.weight_editText);
                 EditText setsInput = view.findViewById(R.id.sets_editText);
                 EditText repsInput = view.findViewById(R.id.reps_editText);
 
-                m_Text = nameInput.getText().toString();
-                m_Weight = Double.valueOf(weightInput.getText().toString());
-                m_sets = Integer.valueOf(setsInput.getText().toString());
-                m_reps = Integer.valueOf(repsInput.getText().toString());
-                collectionWrapper.add(new Exercise(m_Text,m_Weight,m_sets,m_reps));
+                EditText[] inputs = {nameInput, weightInput, setsInput, repsInput};
+
+                if(EditTextEmptyCheck(weightInput)){
+                    m_Weight = 0.0;
+                } else{
+                    m_Weight = Double.valueOf(weightInput.getText().toString());
+                }
+
+                if(EditTextEmptyCheck(repsInput)){
+                    m_reps = 0;
+                } else{
+                    m_reps = Integer.valueOf(repsInput.getText().toString());
+                }
+
+                if(EditTextEmptyCheck(setsInput)){
+                    m_sets = 0;
+                } else{
+                    m_sets = Integer.valueOf(setsInput.getText().toString());
+                }
+                if(EditTextEmptyCheck(nameInput)){
+                    m_Text = "Exercise " + index;
+                    index++;
+                } else{
+                    m_Text = nameInput.getText().toString();
+                }
+
+
                 sAdapter.notifyDataSetChanged();
             }
         });
@@ -107,9 +133,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        builder.show();
+        //builder.show();
 
 
+    }
+
+    private boolean EditTextEmptyCheck(EditText etText) {
+        return etText.getText().toString().trim().length() <= 0;
     }
 
 }
