@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">WorkoutPlanner</string>
     <string name="new_exercise">Add an Exercise</string>
+    <string name="new_workout">Add Workout</string>
     <string name="weight_string">Weight:</string>
     <string name="reps_string">Reps:</string>
     <string name="sets_string">Sets:</string>
@@ -8,4 +9,5 @@
     <string name="zeroInt">0</string>
     <string name="zeroDec">0.0</string>
     <string name="defaultExerciseName">Exercise</string>
+    <string name="done">Done</string>
 </resources>
