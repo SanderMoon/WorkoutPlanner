@@ -1,5 +1,7 @@
 package com.example.sande.workoutplanner.Activities;
 
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -73,7 +75,20 @@ public class workoutListActivity extends AppCompatActivity {
 
     private void addWorkout() {
 
-        startActivity(new Intent(workoutListActivity.this, MainActivity.class));
+        startActivity(new Intent(workoutListActivity.this, WorkoutPage.class));
+
+        // Intent for the activity to open when user selects the notification
+        Intent detailsIntent = new Intent(this, WorkoutPage.class);
+
+    // Use TaskStackBuilder to build the back stack and get the PendingIntent
+        PendingIntent pendingIntent =
+                TaskStackBuilder.create(this)
+                        // add all of DetailsActivity's parents to the stack,
+                        // followed by DetailsActivity itself
+                        .addNextIntentWithParentStack(detailsIntent)
+                        .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
 
         Exercise chestExercise =  new ChestExercise("Barbell benchpress",Tag.TRICEPS);
         WorkoutExercise workoutExercise = new WorkoutExercise(chestExercise,80.0,4,5);
