@@ -4,7 +4,9 @@ import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -28,19 +30,21 @@ import java.util.ArrayList;
 public class workoutListActivity extends AppCompatActivity {
 
     private WorkoutListAdapter customAdapter;
-    ArrayList<Workout> workouts;
+    ArrayList<Workout> workouts = new ArrayList<>();
     ListView listView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println(savedInstanceState==null);
+        if(savedInstanceState != null){
+            workouts = savedInstanceState.getParcelableArrayList("workoutList");
+        }
         setContentView(R.layout.workout_list_page);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         listView = findViewById(R.id.workoutListView);
-
-        workouts = new ArrayList<>();
 
         customAdapter = new WorkoutListAdapter(workouts, getApplicationContext());
 
@@ -55,6 +59,21 @@ public class workoutListActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList("workoutList", workouts);
+        super.onSaveInstanceState(outState);
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        this.workouts = savedInstanceState.getParcelableArrayList("workoutList");
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -74,20 +93,8 @@ public class workoutListActivity extends AppCompatActivity {
     }
 
     private void addWorkout() {
-
-        startActivity(new Intent(workoutListActivity.this, WorkoutPage.class));
-
-        // Intent for the activity to open when user selects the notification
         Intent detailsIntent = new Intent(this, WorkoutPage.class);
-
-    // Use TaskStackBuilder to build the back stack and get the PendingIntent
-        PendingIntent pendingIntent =
-                TaskStackBuilder.create(this)
-                        // add all of DetailsActivity's parents to the stack,
-                        // followed by DetailsActivity itself
-                        .addNextIntentWithParentStack(detailsIntent)
-                        .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-
+        startActivity(detailsIntent);
 
 
         Exercise chestExercise =  new ChestExercise("Barbell benchpress",Tag.TRICEPS);

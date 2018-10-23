@@ -28,13 +28,6 @@ import com.example.sande.workoutplanner.Model.ExerciseCollection;
  */
 
 
-//TODO 2 - Custom listItem
-//TODO 3 - show weight, sets and reps in the custom listitem
-//TODO 4 - Add a search button in the menu and make exercises searchable
-//TODO 5 - Give the list a header / AND make the listview collapsable
-//TODO 6 - Divide Exercises up based on muscle group and have each muscle group their own collapsable list
-//TODO 7 - Handle clickevents on the list
-//TODO 8 - Create a pre-defined list of exercises somewhere to use in the listview
 
 public class MainActivity extends AppCompatActivity {
 
@@ -89,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //TODO 1 - nullcheck the input
 
                 EditText nameInput = view.findViewById(R.id.name_editText);
                 EditText weightInput = view.findViewById(R.id.weight_editText);
